@@ -31,7 +31,7 @@ Thu Apr 24 17:20:17 2025
 ## 1. Prepare Environment
 
 ```bash
-module load miniforge
+module load miniforge cuda
 conda create -n lf python=3.12
 conda activate lf
 ```
@@ -43,6 +43,7 @@ conda activate lf
 git clone --depth 1 https://github.com/hiyouga/LLaMA-Factory.git
 cd LLaMA-Factory
 pip install -e ".[torch,metrics]"
+pip install deepspeed py-cpuinfo wandb
 ```
 
 ## 3. Configuring Llama-Factory
@@ -63,7 +64,7 @@ Dataset format definitions are in [./LLaMA-Factory/data/dataset_info.json](../LL
 ## 5.1 Train with GUI
 
 ```bash
-llamafactory-cli webui
+GRADIO_SHARE=1 llamafactory-cli webui
 ```
 
 ## 5.2 Train on the command line
@@ -82,7 +83,7 @@ llamafactory-cli export examples/merge_lora/llama3_lora_sft.yaml
 ## 6. Deploy trained model (GUI)
 
 ```bash
-GRADIO_SERVER_PORT=8080 llamafactory-cli webchat /home/zhanwen/finetuners/saves/llama3.2-1b/lora/sft-lora-10000-20250128181805/config_webchat.yaml |& tee logs_eval/log_eval_$(date +"%Y-%m-%d-%H%M%S").log
+GRADIO_SHARE=1 GRADIO_SERVER_PORT=8080 llamafactory-cli webchat /home/zhanwen/finetuners/saves/llama3.2-1b/lora/sft-lora-10000-20250128181805/config_webchat.yaml |& tee logs_eval/log_eval_$(date +"%Y-%m-%d-%H%M%S").log
 ```
 
 ## 6.2 Deploy Trained Model (OpenAP-Like API Endpoint with VLLM)
