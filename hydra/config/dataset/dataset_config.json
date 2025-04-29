@@ -1,0 +1,94 @@
+{
+    "office": {
+        "domain_list": [
+            "amazon",
+            "dslr",
+            "webcam"
+        ],
+        "pda": {
+            "shared_class_num": 10,
+            "source_private_class_num": 21,
+            "target_private_class_num": 0
+        },
+        "osda": {
+            "shared_class_num": 10,
+            "source_private_class_num": 0,
+            "target_private_class_num": 10 
+        },
+        "opda": {
+            "shared_class_num": 10,
+            "source_private_class_num": 10,
+            "target_private_class_num": 11
+        },
+        "feature_dim": 256
+    },
+    "officehome": {
+        "domain_list": [
+            "art",
+            "clipart",
+            "product",
+            "realworld"
+        ],
+        "pda": {
+            "shared_class_num": 25,
+            "source_private_class_num": 40,
+            "target_private_class_num": 0
+        },
+        "osda": {
+            "shared_class_num": 25,
+            "source_private_class_num": 0,
+            "target_private_class_num": 40
+        },
+        "opda": {
+            "shared_class_num": 10,
+            "source_private_class_num": 5,
+            "target_private_class_num": 50
+        },
+        "feature_dim": 256
+    },
+    "visda": {
+        "domain_list": [
+            "train",
+            "validation"
+        ],
+        "pda": {
+            "shared_class_num": 6,
+            "source_private_class_num": 6,
+            "target_private_class_num": 0
+        },
+        "osda": {
+            "shared_class_num": 6,
+            "source_private_class_num": 0,
+            "target_private_class_num": 6
+        },
+        "opda": {
+            "shared_class_num": 6,
+            "source_private_class_num": 3,
+            "target_private_class_num": 3
+        },
+        "feature_dim": 256
+    },
+    "domainnet": {
+        "domain_list": [
+            "painting",
+            "real",
+            "sketch"
+        ],
+        "pda": {
+            "shared_class_num": 126,
+            "source_private_class_num": 126,
+            "target_private_class_num": 0
+        },
+        "osda": {
+            "shared_class_num": 126,
+            "source_private_class_num": 0,
+            "target_private_class_num": 126
+        },
+        "opda": {
+            "shared_class_num": 126,
+            "source_private_class_num": 63,
+            "target_private_class_num": 63
+        },
+        "feature_dim": 1024
+    }
+}

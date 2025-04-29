@@ -1,0 +1,104 @@
+defaults: []
+
+tags: [0, 1]
+device: cuda
+train: false  # default is False as we only evaluate the models
+
+ckpt_path: ${hydra:runtime.cwd}/eval_ckpts/
+
+eval:
+  metrics: [Accuracy, H-Score]  # H-Score will not be calculated in PDA (no unknown predictions)
+
+logging:
+  wandb: true
+  wandb_project_name: unida-tta-exps
+
+dataset:
+  data_path: ${hydra:runtime.cwd}/data/
+
+cwd: ${hydra:runtime.cwd}
+
+# define base keys for unida_runs so that interpolation works
+unida_runs:
+  unida_enabled: true
+  models: null
+  datasets: null
+  transfers: null
+  settings: null
+  corruption: null
+  model_paths:
+    DANCE: "/home/sgw3fy/jobs/ttda_jobs/DANCE/checkpoints"
+    DCC: "/home/sgw3fy/jobs/ttda_jobs/Domain-Consensus-Clustering/snapshot"
+    OVANet: "/home/sgw3fy/jobs/ttda_jobs/OVANet/checkpoints"
+    UniOT: ""
+    GLC: "/home/sgw3fy/jobs/ttda_jobs/GLC/checkpoints_glc"
+    LEAD: "/home/sgw3fy/jobs/ttda_jobs/LEAD/checkpoints"
+
+# Optional: if your code uses tta_runs, include a base definition here too
+tta_runs:
+  tta_enabled: null
+#   unida_models: []
+#   tta_models: []
+#   datasets: []
+#   transfers: []
+#   settings: []
+
+# datasets:
+#   Office:
+#     path: "/home/sgw3fy/jobs/unida_jobs/LEAD/data/Office"
+#     splits:
+#       opda: [10, 10, 11]
+#       osda: [10, 0, 11]
+#       pda: [10, 21, 0]
+
+hydra:
+  sweeper:
+    # this should be overriden by python command specifying parameters
+    params:
+      unida_runs.unida_enabled:
+        - true
+      unida_runs.models:
+        - LEAD
+        - DANCE
+      unida_runs.datasets:
+        - Office
+        - OfficeHome
+      unida_runs.transfers:
+        - all
+      unida_runs.settings:
+        - PDA
+        - OSDA
+      unida_runs.corruption:
+        - false
+        - true
+
+      tta_runs.tta_enabled:
+        - false
+        
+  launcher:
+    timeout_min: 8
+    cpus_per_task: 4
+    gpus_per_node: null
+    tasks_per_node: 1
+    mem_gb: 8
+    nodes: 1
+    name: ${hydra.job.name}
+    _target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+    partition: gpu
+    qos: null
+    comment: null
+    constraint: null
+    exclude: null
+    gres: gpu:1
+    cpus_per_gpu: null
+    gpus_per_task: 1
+    mem_per_gpu: null
+    mem_per_cpu: null
+    account: hpc_training
+    signal_delay_s: 120
+    max_num_timeout: 0
+    additional_parameters:
+      output: "unida_tta_run.log"
+      error: "unida_tta_run.log"
+    array_parallelism: 256
+    setup: null

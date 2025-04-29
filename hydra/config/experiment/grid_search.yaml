@@ -1,0 +1,12 @@
+# @package _global_
+hydra:
+  sweeper:
+    # this should be overriden by python command specifying parameters
+    params:
+      +unida_runs.unida_enabled: true
+      +unida_runs.models: LEAD, DANCE
+      +unida_runs.datasets: Office, OfficeHome
+      +unida_runs.transfers: all
+      +unida_runs.settings: PDA,OSDA
+      +unida_runs.corruption: false, true
+      +tta_runs.tta_enabled: false

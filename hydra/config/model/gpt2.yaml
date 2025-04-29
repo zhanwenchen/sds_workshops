@@ -1,0 +1,5 @@
+class_name: HFModel
+hf_model_class: GPT2LMHeadModel
+hf_model_name: openai-community/gpt2
+tokenizer_class: GPT2TokenizerFast
+tokenizer_name: openai-community/gpt2

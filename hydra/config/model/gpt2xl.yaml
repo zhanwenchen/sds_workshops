@@ -1,0 +1,5 @@
+class_name: GPT2LMHeadModel
+tokenizer_class: GPT2TokenizerFast
+tokenizer_name: gpt2-xl
+embed_dim: 2048
+pt: /data/healthy-ml/scratch/tomh/code/GRACE/ckpts/hallucination/ # path to directory containing weights
